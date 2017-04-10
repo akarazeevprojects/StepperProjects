@@ -5,16 +5,16 @@ import sys
 import os
 import time
 import argparse
- 
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
- 
+
 enable_pin = 18
 coil_A_1_pin = 4
 coil_A_2_pin = 17
 coil_B_1_pin = 23
 coil_B_2_pin = 24
-relay_pin = 9 
+relay_pin = 9
 
 GPIO.setup(relay_pin, GPIO.OUT)
 GPIO.setup(enable_pin, GPIO.OUT)
@@ -22,15 +22,15 @@ GPIO.setup(coil_A_1_pin, GPIO.OUT)
 GPIO.setup(coil_A_2_pin, GPIO.OUT)
 GPIO.setup(coil_B_1_pin, GPIO.OUT)
 GPIO.setup(coil_B_2_pin, GPIO.OUT)
- 
+
 GPIO.output(enable_pin, 1)
 
 def shoot(delay):
   GPIO.output(relay_pin, GPIO.LOW)
   time.sleep(delay)
   GPIO.output(relay_pin, GPIO.HIGH)
- 
-def forward(delay, steps): 
+
+def forward(delay, steps):
   for i in range(0, steps):
     setStep(1, 0, 1, 0)
     time.sleep(delay)
@@ -40,8 +40,8 @@ def forward(delay, steps):
     time.sleep(delay)
     setStep(1, 0, 0, 1)
     time.sleep(delay)
- 
-def backwards(delay, steps):  
+
+def backwards(delay, steps):
   for i in range(0, steps):
     setStep(1, 0, 0, 1)
     time.sleep(delay)
@@ -51,7 +51,7 @@ def backwards(delay, steps):
     time.sleep(delay)
     setStep(1, 0, 1, 0)
     time.sleep(delay)
-  
+
 def setStep(w1, w2, w3, w4):
   GPIO.output(coil_A_1_pin, w1)
   GPIO.output(coil_A_2_pin, w2)
@@ -68,31 +68,31 @@ try:
   parser.add_argument('direct', help='direction of the motor', type=int)
   parser.add_argument('number', help='number of photos', type=int)
   parser.add_argument('seconds', help='time per shot', type=int)
-  parser.add_argument('-d','--delay', help='delay in forward/backwards', 
+  parser.add_argument('-d','--delay', help='delay in forward/backwards',
                       default=3, type=float)
-  parser.add_argument('-l','--limit', help='quantity of big steps', 
+  parser.add_argument('-l','--limit', help='quantity of big steps',
                       default=28, type=int)
-  parser.add_argument('-p','--pause', help='pause between big steps', 
+  parser.add_argument('-p','--pause', help='pause between big steps',
                       default=0, type=float)
-  parser.add_argument('-s','--steps', help='quantity of steps per big step', 
+  parser.add_argument('-s','--steps', help='quantity of steps per big step',
                       default=1000, type=int)
 
   args = parser.parse_args()
 
-  direct = args.direct
+  # direct = args.direct
   number = args.number
-  limit = args.limit
+  # limit = args.limit
   seconds = args.seconds
-  pause = args.pause
-  delay = args.delay
-  steps = args.steps
-  
+  # pause = args.pause
+  # delay = args.delay
+  # steps = args.steps
+
   limit = number
   steps = int(28000. / float(limit))
   timing = (steps * limit * 4. * delay) / 1000.
   pause = int(((number * seconds) - timing) / limit)
   tot_time = int(timing + (pause * limit))
-  
+
   print '|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+'
   print '|'
   print '+       Start with parameters:'
@@ -107,17 +107,17 @@ try:
   print '|            ({} sec)'.format(tot_time)
   print '|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+'
 
-  count = 0 
+  count = 0
   while count < limit:
     count += 1
 
     shoot(seconds)
-    
+
     if direct:
       forward(int(delay) / 1000.0, int(steps))
     else:
       backwards(int(delay) / 1000.0, int(steps))
-    print 'Curr.count: {}/{}'.format(count,limit) 
+    print 'Curr.count: {}/{}'.format(count,limit)
 
   print 'Count is', count
   print 'Stop'
