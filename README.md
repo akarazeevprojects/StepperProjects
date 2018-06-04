@@ -2,9 +2,10 @@
 
 All the code can be found in [qst_demo/](qst_demo) folder.
 
-| Overview    | [[video](https://youtu.be/uJqOmeSxVj4)] |
+| Overview [[video](https://youtu.be/uJqOmeSxVj4)]    | Circuit |
 | :------------- | :---- |
-| <img src="img/img4.jpg" width="500px">       | <img src="img/img5.jpg" width="500px">       |
+| <img src="img/img4.jpg" width="500px">       |  <img src="img/circuit.png" width="500px">   |
+| <img src="img/img5.jpg" width="500px">   |
 
 ## Camera Slider
 
@@ -21,6 +22,7 @@ All the code can be found in [camera_slider/](camera_slider) folder.
 | :------------- | :------------- |
 | Control an LED   | [[Tutorial](https://thepihut.com/blogs/raspberry-pi-tutorials/27968772-turning-on-an-led-with-your-raspberry-pis-gpio-pins)] on how to turn on and off an LED with Raspberry Pi  |
 | Control Stepper Motor   | [[Tutorial by adafruit](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-10-stepper-motors/software)] on how to control Stepper Motor using L293D with Raspberry Pi  |
+| [Fritzing](http://fritzing.org/home/)   | Allows to document prototypes (graphical designer to draw electric circuits)  |
 
 ## Components & parts
 
