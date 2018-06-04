@@ -1,12 +1,10 @@
-#!/usr/bin/env python
-
-import sys
-import os
-import time
 import argparse
 import platform
+import time
+import sys
+import os
 
-bool is_rasp = (platform.system() == 'Linux')
+is_rasp = (platform.system() == "Linux")
 
 if is_rasp:
     import RPi.GPIO as GPIO
@@ -42,7 +40,6 @@ def shoot(delay):
 
 def forward(delay, steps):
     for i in range(0, steps):
-        t1 = time.time()
         setStep(1, 0, 1, 0)
         time.sleep(delay)
         setStep(0, 1, 1, 0)
@@ -51,13 +48,10 @@ def forward(delay, steps):
         time.sleep(delay)
         setStep(1, 0, 0, 1)
         time.sleep(delay)
-        t2 = time.time()
-        # print "Kek: {}".format(t2 - t1)
 
 
 def backwards(delay, steps):
     for i in range(0, steps):
-        t1 = time.time()
         setStep(1, 0, 0, 1)
         time.sleep(delay)
         setStep(0, 1, 0, 1)
@@ -67,7 +61,6 @@ def backwards(delay, steps):
         setStep(1, 0, 1, 0)
         time.sleep(delay)
         t2 = time.time()
-        # print "Kek: {}".format(t2 - t1)
 
 
 def setStep(w1, w2, w3, w4):
@@ -84,18 +77,21 @@ def setStep(w1, w2, w3, w4):
 
 try:
     parser = argparse.ArgumentParser()
-    parser.add_argument("direct", help='direction of the motor', type=int)
-    parser.add_argument("limit", help='quantity of big steps', type=int)
-    parser.add_argument('-d', '--delay', help='delay in forward/backwards',
+    parser.add_argument("direct", help="direction of the motor", type=int)
+    parser.add_argument("limit", help="quantity of big steps", type=int)
+    parser.add_argument("-d", "--delay", help="delay in forward/backwards",
                         default=3, type=float)
-    parser.add_argument('-l', '--limit', help='quantity of big steps',
+    parser.add_argument("-l", "--limit", help="quantity of big steps",
                         default=28, type=int)
-    parser.add_argument('-p', '--pause', help='pause between big steps',
+    parser.add_argument("-p", "--pause", help="pause between big steps",
                         default=0, type=float)
-    parser.add_argument('-s', '--steps', help='quantity of steps per big step',
+    parser.add_argument("-s", "--steps", help="quantity of steps per big step",
                         default=1000, type=int)
     args = parser.parse_args()
 
+    # WARNING: Something here is missed. Unfourtunately I forgot the idea
+    # behind some of the variables.
+    # FIXME: !!!
     direct = args.direct
     limit = args.limit
     pause = args.pause
@@ -108,26 +104,26 @@ try:
     steps = int(28000. / float(limit))
     timing = (steps * limit * 4. * delay) / 1000.
     pause = int(((number * seconds) - timing) / limit)
-    tot_time = int(timing + (pause * limit))
 
+    tot_time = int(timing + (pause * limit))
     # tot_time = int(((steps * limit * 4. * delay) / 1000.) + (pause * limit))
 
-    print('|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+')
-    print('|')
-    print('+       Start with parameters:')
-    print('| Direction: {}'.format(direct))
-    print('+ Big steps: {}'.format(limit))
-    print('| Steps per Big step: {}'.format(steps))
-    print('|        Total steps: {}'.format(steps * limit))
-    print('+ Pause: {} sec'.format(pause))
-    print('| Delay: {} msec'.format(delay))
-    print('+ Time per forward/backwards: {} sec'.format((steps * 4. * delay) /
+    print("|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
+    print("|")
+    print("+       Start with parameters:")
+    print("| Direction: {}".format(direct))
+    print("+ Big steps: {}".format(limit))
+    print("| Steps per Big step: {}".format(steps))
+    print("|        Total steps: {}".format(steps * limit))
+    print("+ Pause: {} sec".format(pause))
+    print("| Delay: {} msec".format(delay))
+    print("+ Time per forward/backwards: {} sec".format((steps * 4. * delay) /
                                                         1000.))
-    print('|        Total Time: {}h. {}m. {}s.'.format(tot_time / 3600,
+    print("|        Total Time: {}h. {}m. {}s.".format(tot_time / 3600,
                                                        (tot_time / 60) % 3600,
                                                        tot_time % 60))
-    print('|            ({} sec)'.format(tot_time))
-    print('|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+')
+    print("|            ({} sec)".format(tot_time))
+    print("|+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
 
     count = 0
 
@@ -140,18 +136,18 @@ try:
             forward(int(delay) / 1000.0, int(steps))
         else:
             backwards(int(delay) / 1000.0, int(steps))
-        print('Curr.count: {}/{}'.format(count, limit))
+        print("Curr.count: {}/{}".format(count, limit))
         t2 = time.time()
         print("It took: {}".format(t2 - t1))
         if pause:
             time.sleep(pause)
 
-    print('Count is', count)
-    print('Stop')
+    print("Count is", count)
+    print("Stop")
     setStep(0, 0, 0, 0)  # To release the coils.
     GPIO.cleanup()
 
 except KeyboardInterrupt:
-    print('Finish...')
+    print("Finish...")
     setStep(0, 0, 0, 0)
     GPIO.cleanup()
