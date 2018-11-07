@@ -1,17 +1,17 @@
-## Demo of Quantum State Tomography
+## Demo of Quantum State Tomography [[video demonstration](https://youtu.be/uJqOmeSxVj4)]
 
 All the code can be found in [qst_demo/](qst_demo) folder.
 
-| Overview [[video demonstration](https://youtu.be/uJqOmeSxVj4)]    | Circuit |
+| Overview    | Circuit |
 | :------------- | :---- |
 | <img src="img/img4.jpg" width="500px">       |  <img src="img/circuit.png" width="500px">   |
 | <img src="img/img5.jpg" width="500px">   |
 
-## Camera Slider
+## Camera Slider [[video demonstration](https://youtu.be/qXUU8hh9DdM)]
 
 All the code can be found in [camera_slider/](camera_slider) folder.
 
-| Overview    | [[video demonstration](https://youtu.be/qXUU8hh9DdM)] |
+| Overview    |   |
 | :------------- | :---- |
 | <img src="img/img2.jpg" width="500px">       | <img src="img/img1.jpg" width="500px"> |
 | <img src="img/img3.jpg" width="500px">       |
