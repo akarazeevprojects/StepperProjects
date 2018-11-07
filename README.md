@@ -2,7 +2,7 @@
 
 All the code can be found in [qst_demo/](qst_demo) folder.
 
-| Overview [[video](https://youtu.be/uJqOmeSxVj4)]    | Circuit |
+| Overview [[video demonstration](https://youtu.be/uJqOmeSxVj4)]    | Circuit |
 | :------------- | :---- |
 | <img src="img/img4.jpg" width="500px">       |  <img src="img/circuit.png" width="500px">   |
 | <img src="img/img5.jpg" width="500px">   |
@@ -11,7 +11,7 @@ All the code can be found in [qst_demo/](qst_demo) folder.
 
 All the code can be found in [camera_slider/](camera_slider) folder.
 
-| Overview    | [[video](https://vk.com/video182954756_456239030)] |
+| Overview    | [[video demonstration](https://youtu.be/qXUU8hh9DdM)] |
 | :------------- | :---- |
 | <img src="img/img2.jpg" width="500px">       | <img src="img/img1.jpg" width="500px"> |
 | <img src="img/img3.jpg" width="500px">       |
